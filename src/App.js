@@ -34,7 +34,8 @@ function App() {
       years_of_experience: Yup.number()
         .min(0)
         .max(60)
-        .required('Years of Exp Required'),
+        .required('Years of Experience Required'),
+      phone_number: Yup.number().min(100000).max(999999),
       terms_of_use: Yup.boolean().oneOf([true]).required('Required'),
     }),
     onSubmit: (values) => {
@@ -50,9 +51,7 @@ function App() {
           type="text"
           id="first_name"
           name="first_name"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.first_name}
+          {...formik.getFieldProps('first_name')}
           required
         />
         {formik.touched.first_name && formik.errors.first_name && (
@@ -65,9 +64,7 @@ function App() {
           type="text"
           id="last_name"
           name="last_name"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.last_name}
+          {...formik.getFieldProps('last_name')}
           required
         />
         {formik.touched.last_name && formik.errors.last_name && (
@@ -80,9 +77,7 @@ function App() {
           type="email"
           id="email"
           name="email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
+          {...formik.getFieldProps('email')}
           required
         />
         {formik.touched.email && formik.errors.email && (
@@ -96,9 +91,7 @@ function App() {
           id="zip_code"
           name="zip_code"
           placeholder="123456"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.zip_code}
+          {...formik.getFieldProps('zip_code')}
           required
         />
         {formik.touched.zip_code && formik.errors.zip_code && (
@@ -111,9 +104,7 @@ function App() {
           type="password"
           id="password"
           name="password"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.password}
+          {...formik.getFieldProps('password')}
           required
         />
         {formik.touched.password && formik.errors.password && (
@@ -125,9 +116,7 @@ function App() {
         <select
           name="practicing_status"
           id="practicing_status"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.practicing_status}
+          {...formik.getFieldProps('practicing_status')}
           required
         >
           <option value="0">Practicing Lawyer</option>
@@ -144,9 +133,7 @@ function App() {
         <select
           name="legal_expertise"
           id="legal_expertise"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.legal_expertise}
+          {...formik.getFieldProps('legal_expertise')}
         >
           <option value="antitrust">Antitrust</option>
           <option value="civil_rights">Civil Rights</option>
@@ -163,11 +150,7 @@ function App() {
           type="text"
           id="years_of_experience"
           name="years_of_experience"
-          min="0"
-          max="60"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.years_of_experience}
+          {...formik.getFieldProps('years_of_experience')}
           required
         />
         {formik.touched.years_of_experience &&
@@ -180,10 +163,8 @@ function App() {
         <select
           name="languages"
           id="languages"
+          {...formik.getFieldProps('languages')}
           multiple
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.languages}
         >
           <option value="es">Spanish</option>
           <option value="en">English</option>
@@ -196,31 +177,24 @@ function App() {
         </select>
         <br />
 
-        <label
-          htmlFor="phone_number"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.phone_number}
-        >
-          Cell Phone Number
-        </label>
+        <label htmlFor="phone_number">Cell Phone Number</label>
         <input
-          type="number"
+          type="text"
           name="phone_number"
           id="phone_number"
-          min="100000"
-          max="999999"
           placeholder="######"
+          {...formik.getFieldProps('phone_number')}
         />
+        {formik.touched.phone_number && formik.errors.phone_number && (
+          <Alert value={formik.errors.phone_number} />
+        )}
         <br />
 
         <label htmlFor="ethnicity">Ethnicity</label>
         <select
           name="ethnicity"
           id="ethnicity"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.ethnicity}
+          {...formik.getFieldProps('ethnicity')}
         >
           <option value="earthling">Earthling</option>
           <option value="martian">Martian</option>
@@ -229,14 +203,11 @@ function App() {
         <br />
 
         <label htmlFor="terms_of_use">
-
           <input
             type="checkbox"
             name="terms_of_use"
             id="terms_of_use"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.terms_of_use}
+            {...formik.getFieldProps('terms_of_use')}
             required
           />
           I swear that I totally read the terms of use
@@ -246,9 +217,7 @@ function App() {
         )}
         <br />
 
-        <button type="submit">
-          Show values
-        </button>
+        <button type="submit">Show values</button>
       </form>
     </div>
   );
