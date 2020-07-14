@@ -14,7 +14,7 @@ function App() {
       email: '',
       zip_code: '',
       password: '',
-      practicing_status: 0,
+      practicing_status: '1',
       legal_expertise: 'other',
       years_of_experience: '',
       languages: [],
